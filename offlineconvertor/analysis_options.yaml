@@ -1,0 +1,37 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  errors:
+    # Unused code should fail loudly during a large build-out.
+    unused_import: warning
+    unused_local_variable: warning
+    dead_code: warning
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+
+linter:
+  rules:
+    # Style choices for this codebase
+    always_declare_return_types: true
+    avoid_empty_else: true
+    avoid_unnecessary_containers: true
+    prefer_final_locals: true
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    sort_child_properties_last: true
+    unawaited_futures: true
+    use_super_parameters: true
+
+    # Disabled: the suggested fix (a named initialising formal such as
+    # `{required this._service}`) is not legal for private fields, and these
+    # constructors intentionally keep their dependencies private.
+    prefer_initializing_formals: false

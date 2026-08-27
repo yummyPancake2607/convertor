@@ -1,0 +1,45 @@
+name: offlineconvertor
+description: "Offline Universal File Converter - fully local video, audio, image and document conversion."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # State management (UI <- Controller boundary)
+  provider: ^6.1.2
+
+  # File selection (SAF-backed on Android)
+  file_picker: ^8.1.6
+
+  # Filesystem & paths
+  path: ^1.9.0
+  path_provider: ^2.1.5
+
+  # Persistence for settings + history (local only)
+  shared_preferences: ^2.3.3
+
+  # Utilities
+  uuid: ^4.5.1
+  intl: ^0.20.1
+  collection: ^1.19.0
+
+  # Opening output files with the platform's default handler.
+  # open_filex is used rather than url_launcher because Android forbids handing
+  # a raw file:// URI to another app; it goes through a FileProvider instead.
+  open_filex: ^4.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
