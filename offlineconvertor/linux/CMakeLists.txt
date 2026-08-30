@@ -14,7 +14,10 @@ set(APPLICATION_ID "com.example.offlineconvertor")
 cmake_policy(SET CMP0063 NEW)
 
 # Load bundled libraries from the lib/ directory relative to the binary.
-set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/lib;$ORIGIN/../lib")
+
+# Native conversion engine library
+set(CONVERTOR_LIB "${CMAKE_CURRENT_SOURCE_DIR}/libconvertor.so.1.0.0")
 
 # Root filesystem for cross-building.
 if(FLUTTER_TARGET_PLATFORM_SYSROOT)
@@ -99,6 +102,16 @@ install(FILES "${FLUTTER_ICU_DATA_FILE}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}
 
 install(FILES "${FLUTTER_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
   COMPONENT Runtime)
+
+# Install the native conversion engine library
+install(FILES "${CONVERTOR_LIB}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
+  COMPONENT Runtime)
+install(CODE "
+  execute_process(COMMAND ln -sf libconvertor.so.1.0.0 libconvertor.so.1
+    WORKING_DIRECTORY \"${INSTALL_BUNDLE_LIB_DIR}\")
+  execute_process(COMMAND ln -sf libconvertor.so.1 libconvertor.so
+    WORKING_DIRECTORY \"${INSTALL_BUNDLE_LIB_DIR}\")
+  " COMPONENT Runtime)
 
 foreach(bundled_library ${PLUGIN_BUNDLED_LIBRARIES})
   install(FILES "${bundled_library}"

@@ -25,14 +25,22 @@ void main() {
   });
 
   group('conversion matrix', () {
-    test('video offers video, audio and still targets', () {
+    test('video offers video and audio targets, never a still image', () {
       final List<FileFormat> outputs = FormatCatalog.outputsFor(
         FormatCatalog.mp4,
       );
       expect(outputs, contains(FormatCatalog.mkv));
       expect(outputs, contains(FormatCatalog.mp3));
-      expect(outputs, contains(FormatCatalog.gif));
-      expect(outputs, contains(FormatCatalog.png));
+
+      // Pulling one frame out of a video is not a conversion this app offers.
+      expect(
+        outputs.every(
+          (FileFormat f) =>
+              f.mediaType == MediaType.video || f.mediaType == MediaType.audio,
+        ),
+        isTrue,
+        reason: 'video should only convert to video or audio',
+      );
     });
 
     test('audio offers only audio targets', () {
@@ -56,23 +64,16 @@ void main() {
       expect(outputs, contains(FormatCatalog.pdf));
     });
 
-    test('documents use the per-format table', () {
-      expect(
-        FormatCatalog.outputsFor(FormatCatalog.docx),
-        contains(FormatCatalog.pdf),
-      );
-      expect(
-        FormatCatalog.outputsFor(FormatCatalog.xlsx),
-        contains(FormatCatalog.csv),
-      );
+    test('documents offer Word and PDF only', () {
+      // The app converts Word to PDF and PDF to Word; nothing else in the
+      // document category is on offer, so nothing else may appear here.
       expect(
         FormatCatalog.outputsFor(FormatCatalog.pdf),
-        contains(FormatCatalog.png),
+        <FileFormat>[FormatCatalog.docx],
       );
-      // A spreadsheet should not offer a presentation as a target.
       expect(
-        FormatCatalog.outputsFor(FormatCatalog.xlsx),
-        isNot(contains(FormatCatalog.pptx)),
+        FormatCatalog.outputsFor(FormatCatalog.docx),
+        <FileFormat>[FormatCatalog.pdf],
       );
     });
 

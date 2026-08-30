@@ -6,6 +6,7 @@ import 'package:provider/single_child_widget.dart';
 import 'app.dart';
 import 'providers/conversion_flow_provider.dart';
 import 'services/conversion_service.dart';
+import 'services/cpp_ffi_conversion_service.dart';
 import 'services/file_system_service.dart';
 import 'services/mock_conversion_service.dart';
 
@@ -53,13 +54,19 @@ Future<void> main() async {
   );
 }
 
-/// Stage 1 uses the simulated engine.
+/// Stage 2 uses the native C++ engine via FFI.
 ///
-/// Stage 2 replaces the body of this function with:
-///
-/// ```dart
-/// return CppFfiConversionService();
-/// ```
-///
-/// No other file needs to change.
-ConversionService _buildConversionService() => MockConversionService();
+/// Falls back to the mock engine if the shared library cannot be loaded.
+ConversionService _buildConversionService() {
+  try {
+    final service = CppFfiConversionService();
+    // Quick smoke test: try to load the library
+    final info = service.engineInfo;
+    debugPrint('[main] Native engine loaded: ${info.displayName}');
+    return service;
+  } catch (e, st) {
+    debugPrint('[main] Failed to load native engine: $e');
+    debugPrint('[main] Stack trace: $st');
+    return MockConversionService();
+  }
+}

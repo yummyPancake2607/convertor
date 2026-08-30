@@ -32,7 +32,7 @@ abstract final class FormatCatalog {
     label: 'AVI',
     mediaType: MediaType.video,
     mimeType: 'video/x-msvideo',
-    description: 'Legacy Windows container.',
+    description: 'Legacy Windows container. Read only.',
   );
   static const FileFormat mov = FileFormat(
     id: 'mov',
@@ -60,14 +60,14 @@ abstract final class FormatCatalog {
     label: 'WMV',
     mediaType: MediaType.video,
     mimeType: 'video/x-ms-wmv',
-    description: 'Windows Media container.',
+    description: 'Windows Media container. Read only.',
   );
   static const FileFormat threeGp = FileFormat(
     id: '3gp',
     label: '3GP',
     mediaType: MediaType.video,
     mimeType: 'video/3gpp',
-    description: 'Mobile container, small files.',
+    description: '3GPP mobile container. Read only.',
   );
   static const FileFormat mpeg = FileFormat(
     id: 'mpeg',
@@ -75,14 +75,14 @@ abstract final class FormatCatalog {
     mediaType: MediaType.video,
     mimeType: 'video/mpeg',
     aliases: <String>['mpg'],
-    description: 'MPEG program stream.',
+    description: 'MPEG program stream. Read only.',
   );
   static const FileFormat m4v = FileFormat(
     id: 'm4v',
     label: 'M4V',
     mediaType: MediaType.video,
     mimeType: 'video/x-m4v',
-    description: 'Apple MP4 variant.',
+    description: 'Apple MP4 variant. Read only.',
   );
   static const FileFormat ts = FileFormat(
     id: 'ts',
@@ -97,7 +97,7 @@ abstract final class FormatCatalog {
     label: 'Ogg Video',
     mediaType: MediaType.video,
     mimeType: 'video/ogg',
-    description: 'Ogg container with Theora video.',
+    description: 'Ogg container with Theora video. Read only.',
   );
 
   // ---------------------------------------------------------------------------
@@ -159,7 +159,6 @@ abstract final class FormatCatalog {
     label: 'WMA',
     mediaType: MediaType.audio,
     mimeType: 'audio/x-ms-wma',
-    canWrite: false,
     description: 'Windows Media Audio. Read only.',
   );
   static const FileFormat aiff = FileFormat(
@@ -169,7 +168,7 @@ abstract final class FormatCatalog {
     mimeType: 'audio/aiff',
     aliases: <String>['aif'],
     isLossless: true,
-    description: 'Uncompressed Apple audio.',
+    description: 'Uncompressed Apple audio. Read only.',
   );
 
   // ---------------------------------------------------------------------------
@@ -242,16 +241,18 @@ abstract final class FormatCatalog {
     mediaType: MediaType.image,
     mimeType: 'image/heic',
     aliases: <String>['heif'],
-    canWrite: false,
     description: 'Apple photo format. Read only.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat svg = FileFormat(
     id: 'svg',
     label: 'SVG',
     mediaType: MediaType.image,
     mimeType: 'image/svg+xml',
-    canWrite: false,
     description: 'Vector source. Rasterised on output.',
+    canRead: false,
+    canWrite: false,
   );
 
   // ---------------------------------------------------------------------------
@@ -269,8 +270,9 @@ abstract final class FormatCatalog {
     label: 'DOC',
     mediaType: MediaType.document,
     mimeType: 'application/msword',
+    description: 'Legacy binary Word. Not supported: needs a compound-file parser.',
+    canRead: false,
     canWrite: false,
-    description: 'Legacy Word document. Read only.',
   );
   static const FileFormat docx = FileFormat(
     id: 'docx',
@@ -285,6 +287,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'application/vnd.oasis.opendocument.text',
     description: 'OpenDocument text.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat rtf = FileFormat(
     id: 'rtf',
@@ -292,6 +296,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'application/rtf',
     description: 'Rich Text Format.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat txt = FileFormat(
     id: 'txt',
@@ -299,6 +305,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'text/plain',
     description: 'Plain text.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat md = FileFormat(
     id: 'md',
@@ -307,6 +315,8 @@ abstract final class FormatCatalog {
     mimeType: 'text/markdown',
     aliases: <String>['markdown'],
     description: 'Markdown source.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat html = FileFormat(
     id: 'html',
@@ -315,14 +325,17 @@ abstract final class FormatCatalog {
     mimeType: 'text/html',
     aliases: <String>['htm'],
     description: 'Web page.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat ppt = FileFormat(
     id: 'ppt',
     label: 'PPT',
     mediaType: MediaType.document,
     mimeType: 'application/vnd.ms-powerpoint',
+    description: 'Legacy binary PowerPoint. Not supported: needs a compound-file parser.',
+    canRead: false,
     canWrite: false,
-    description: 'Legacy PowerPoint. Read only.',
   );
   static const FileFormat pptx = FileFormat(
     id: 'pptx',
@@ -330,6 +343,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     description: 'PowerPoint presentation.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat odp = FileFormat(
     id: 'odp',
@@ -337,14 +352,17 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'application/vnd.oasis.opendocument.presentation',
     description: 'OpenDocument presentation.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat xls = FileFormat(
     id: 'xls',
     label: 'XLS',
     mediaType: MediaType.document,
     mimeType: 'application/vnd.ms-excel',
+    description: 'Legacy binary Excel. Not supported: needs a compound-file parser.',
+    canRead: false,
     canWrite: false,
-    description: 'Legacy Excel workbook. Read only.',
   );
   static const FileFormat xlsx = FileFormat(
     id: 'xlsx',
@@ -353,6 +371,8 @@ abstract final class FormatCatalog {
     mimeType:
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     description: 'Excel workbook.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat ods = FileFormat(
     id: 'ods',
@@ -360,6 +380,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'application/vnd.oasis.opendocument.spreadsheet',
     description: 'OpenDocument spreadsheet.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat csv = FileFormat(
     id: 'csv',
@@ -367,6 +389,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'text/csv',
     description: 'Comma-separated values.',
+    canRead: false,
+    canWrite: false,
   );
   static const FileFormat epub = FileFormat(
     id: 'epub',
@@ -374,6 +398,8 @@ abstract final class FormatCatalog {
     mediaType: MediaType.document,
     mimeType: 'application/epub+zip',
     description: 'E-book.',
+    canRead: false,
+    canWrite: false,
   );
 
   // ---------------------------------------------------------------------------
@@ -487,72 +513,63 @@ abstract final class FormatCatalog {
   // Conversion matrix
   // ---------------------------------------------------------------------------
 
-  /// Frame/still targets available when exporting from a video.
-  static const List<FileFormat> _videoStillTargets = <FileFormat>[
-    png,
+  /// Video containers the engine can write.
+  static const List<FileFormat> _videoTargets = <FileFormat>[
+    mp4,
+    mkv,
+    mov,
+    webm,
+    ts,
+    flv,
+  ];
+
+  /// Audio containers the engine can write.
+  static const List<FileFormat> _audioTargets = <FileFormat>[
+    mp3,
+    wav,
+    flac,
+    aac,
+    ogg,
+    m4a,
+    opus,
+  ];
+
+  /// Image formats the engine can write.
+  static const List<FileFormat> _imageTargets = <FileFormat>[
     jpg,
-    webpFormat,
+    png,
     gif,
-  ];
-
-  /// Raster targets available when rendering a document page.
-  static const List<FileFormat> _documentRasterTargets = <FileFormat>[
-    png,
-    jpg,
-    tiff,
+    bmp,
     webpFormat,
+    tiff,
   ];
 
-  /// Per-document-format output table.
-  ///
-  /// Document conversion is not a uniform matrix the way media transcoding is,
-  /// so each source format declares its realistic targets explicitly.
-  static final Map<String, List<FileFormat>> _documentTargets =
-      <String, List<FileFormat>>{
-        pdf.id: <FileFormat>[..._documentRasterTargets, txt, html],
-        doc.id: <FileFormat>[pdf, docx, odt, rtf, txt, html],
-        docx.id: <FileFormat>[pdf, odt, rtf, txt, html, md],
-        odt.id: <FileFormat>[pdf, docx, rtf, txt, html, md],
-        rtf.id: <FileFormat>[pdf, docx, odt, txt, html],
-        txt.id: <FileFormat>[pdf, docx, odt, rtf, html, md],
-        md.id: <FileFormat>[pdf, html, docx, odt, txt],
-        html.id: <FileFormat>[pdf, docx, odt, txt, md],
-        ppt.id: <FileFormat>[pdf, pptx, odp, png, jpg],
-        pptx.id: <FileFormat>[pdf, odp, png, jpg],
-        odp.id: <FileFormat>[pdf, pptx, png, jpg],
-        xls.id: <FileFormat>[pdf, xlsx, ods, csv, html],
-        xlsx.id: <FileFormat>[pdf, ods, csv, html],
-        ods.id: <FileFormat>[pdf, xlsx, csv, html],
-        csv.id: <FileFormat>[xlsx, ods, pdf, html, txt],
-        epub.id: <FileFormat>[pdf, txt, html],
-      };
+  /// Document formats the app converts between: Word and PDF, both ways.
+  static const List<FileFormat> _documentTargets = <FileFormat>[pdf, docx];
 
   /// The output formats offered for a given input format.
   ///
-  /// This is the exact question the FFI layer will answer later
-  /// (`engine_supported_outputs(input_format)`), so the UI is already written
-  /// against the final shape.
+  /// This mirrors what `convertor_supported_outputs` reports over FFI, so the
+  /// UI offers exactly the conversions the native engine can perform.
   static List<FileFormat> outputsFor(FileFormat input) {
+    if (!input.canRead) return const <FileFormat>[];
+
     final List<FileFormat> result = switch (input.mediaType) {
-      // Video can be transcoded, stripped to audio, or exported as stills.
-      MediaType.video => <FileFormat>[
-        ...videoFormats.where((FileFormat f) => f.canWrite),
-        ...audioFormats.where((FileFormat f) => f.canWrite),
-        ..._videoStillTargets,
-      ],
-      MediaType.audio =>
-        audioFormats.where((FileFormat f) => f.canWrite).toList(),
-      MediaType.image => <FileFormat>[
-        ...imageFormats.where((FileFormat f) => f.canWrite),
-        pdf,
-      ],
-      MediaType.document =>
-        _documentTargets[input.id] ?? const <FileFormat>[pdf],
+      // A video converts to another video container, or is stripped down to
+      // its audio track. Exporting a still frame is not offered: a video is
+      // not a picture, and one arbitrary frame is rarely what was wanted.
+      MediaType.video => <FileFormat>[..._videoTargets, ..._audioTargets],
+      MediaType.audio => _audioTargets,
+      // An image converts to another image, or is wrapped into a PDF page.
+      MediaType.image => <FileFormat>[..._imageTargets, pdf],
+      MediaType.document => _documentTargets,
       MediaType.unknown => const <FileFormat>[],
     };
 
-    // Never offer a no-op conversion.
-    return result.where((FileFormat f) => f.id != input.id).toList();
+    // Never offer a no-op conversion, nor a format the engine cannot write.
+    return result
+        .where((FileFormat f) => f.id != input.id && f.canWrite)
+        .toList();
   }
 
   /// True when the pair is a conversion the application offers.

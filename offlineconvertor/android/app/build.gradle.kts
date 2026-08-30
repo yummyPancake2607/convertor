@@ -27,6 +27,25 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        // The native conversion engine is built for these two ABIs only (see
+        // engine/android/scripts). Without this filter the APK would still
+        // carry an armeabi-v7a slice from the plugins, and on such a device
+        // the engine would fail to load and the app would silently fall back
+        // to placeholder output.
+        ndk {
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
+    }
+
+    // Plugin AARs still contribute an armeabi-v7a slice even though neither the
+    // Flutter runtime nor the conversion engine is built for it. Dropping the
+    // folder keeps stores from offering the app to 32-bit ARM devices it cannot
+    // run on.
+    packaging {
+        jniLibs {
+            excludes += listOf("lib/armeabi-v7a/**")
+        }
     }
 
     buildTypes {
