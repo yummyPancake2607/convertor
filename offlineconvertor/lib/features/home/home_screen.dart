@@ -106,24 +106,13 @@ class _BrandMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 30,
-      height: 30,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: <Color>[
-            context.palette.accent,
-            context.palette.accent.withValues(alpha: 0.72),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(AppRadius.md),
-      ),
-      child: Icon(
-        Icons.swap_horiz_rounded,
-        size: 18,
-        color: context.palette.onAccent,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(AppRadius.md),
+      child: Image.asset(
+        'assests/logo.png',
+        width: 30,
+        height: 30,
+        fit: BoxFit.cover,
       ),
     );
   }

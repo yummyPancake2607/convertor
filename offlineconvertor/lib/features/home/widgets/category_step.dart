@@ -20,6 +20,7 @@ class CategoryStep extends StatelessWidget {
   static const List<MediaType> categories = <MediaType>[
     MediaType.video,
     MediaType.audio,
+    MediaType.image,
     MediaType.document,
   ];
 
@@ -50,24 +51,7 @@ class CategoryStep extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
         ],
-        const SizedBox(height: AppSpacing.md),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.wifi_off_rounded,
-              size: 14,
-              color: context.palette.textTertiary,
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Text(
-              'Everything runs on your device',
-              style: context.text.bodySmall?.copyWith(
-                color: context.palette.textTertiary,
-              ),
-            ),
-          ],
-        ),
+
       ],
     );
   }

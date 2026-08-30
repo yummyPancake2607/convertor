@@ -1,0 +1,7 @@
+# Everything here except the build scripts is generated: upstream tarballs,
+# their unpacked sources, the cross-compiled dependency tree, and the locally
+# built host tools. Only scripts/ is worth tracking - it can rebuild the rest.
+src/
+build/
+prefix/
+hosttools/

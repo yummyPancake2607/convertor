@@ -31,6 +31,9 @@ dependencies:
   intl: ^0.20.1
   collection: ^1.19.0
 
+  # FFI helpers for native engine integration
+  ffi: ^2.1.0
+
   # Opening output files with the platform's default handler.
   # open_filex is used rather than url_launcher because Android forbids handing
   # a raw file:// URI to another app; it goes through a FileProvider instead.
@@ -39,7 +42,27 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
+
+  # Sample inputs used by the on-device conversion test. They are small and
+  # only referenced by integration_test/, but they have to be assets because a
+  # phone has no ffmpeg to generate fixtures with.
+  assets:
+    - assests/
+    - test_assets/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: "assests/logo.png"
+  image_path: "assests/logo.png"
+  adaptive_icon_background: "assests/logo.png"
+  adaptive_icon_foreground: "assests/logo.png"
